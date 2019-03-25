@@ -26,15 +26,32 @@ class NewThread implements Runnable {
 
 public class MultiThreadDemo {
 	public static void main(String args[]) {
-		new NewThread("one");
-		new NewThread("two");
-		new NewThread("three");
+		NewThread ob1 = new NewThread("one");
+		NewThread ob2 = new NewThread("two");
+		NewThread ob3 = new NewThread("three");
+		
+		System.out.println("Thread one is alive: " 
+							+ ob1.t.isAlive());
+		System.out.println("Thread two is alive: " 
+							+ ob2.t.isAlive());
+		System.out.println("Thread three is alive: " 
+							+ ob3.t.isAlive());
 		
 		try {
-			Thread.sleep(10000);
+			// Thread.sleep(10000);
+			System.out.println("Waiting for threads to finish.");
+			ob1.t.join();
+			ob2.t.join();
+			ob3.t.join();
 		} catch(InterruptedException e) {
 			System.out.println("Main thread interrumped.");
 		}
+		System.out.println("Thread one is alive: " 
+							+ ob1.t.isAlive());
+		System.out.println("Thread two is alive: " 
+							+ ob2.t.isAlive());
+		System.out.println("Thread three is alive: " 
+							+ ob3.t.isAlive());
 		System.out.println("Main Thread exiting");
 	}
 }
